@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="[Preencher nomes dos integrantes e turma]" />
+  <title>Trabalho do Grau A — DNA tático (StatsBomb Open Data)</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Trabalho do Grau A — DNA tático (StatsBomb Open
+Data)</h1>
+<p class="subtitle">Como identificar automaticamente o estilo de jogo de
+um time?</p>
+<p class="author">[Preencher nomes dos integrantes e turma]</p>
+<p class="date">Maio de 2026</p>
+</header>
+<h2 id="capa-e-identificação">Capa e identificação</h2>
+<ul>
+<li><strong>Disciplina:</strong> computação aplicada ao futebol —
+Unisinos / Escola Politécnica<br />
+</li>
+<li><strong>Tema:</strong> análise de estilo tático (DNA tático) com
+eventos de partida<br />
+</li>
+<li><strong>Pergunta de pesquisa:</strong> como identificar
+automaticamente o estilo de jogo de um time?<br />
+</li>
+<li><strong>Fonte de dados:</strong> <a
+href="https://github.com/statsbomb/open-data">StatsBomb Open Data</a>
+(dados públicos de eventos).<br />
+</li>
+<li><strong>Atribuição:</strong> dados e marca conforme licença e
+<em>Media Pack</em> da StatsBomb ao publicar análises.</li>
+</ul>
+<p><strong>Competição e jogos analisados</strong></p>
+<table>
+<colgroup>
+<col style="width: 46%" />
+<col style="width: 53%" />
+</colgroup>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Competição</td>
+<td>La Liga — temporada <strong>2015/2016</strong></td>
+</tr>
+<tr>
+<td>IDs</td>
+<td><code>competition_id=11</code>, <code>season_id=27</code></td>
+</tr>
+<tr>
+<td>Partida 1</td>
+<td><code>match_id=266424</code> — 21/11/2015 — <strong>Real Madrid 0 ×
+4 Barcelona</strong> (Bernabéu)</td>
+</tr>
+<tr>
+<td>Partida 2</td>
+<td><code>match_id=267533</code> — 02/04/2016 — <strong>Barcelona 1 × 2
+Real Madrid</strong> (Camp Nou)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Justificativa do recorte:</strong> dois adversários de perfil
+tático contrastante e reconhecível globalmente; dois confrontos na mesma
+temporada (cada time uma vez como mandante), permitindo comparar DNA
+agregado sem inflar o escopo.</p>
+<hr />
+<h1 id="parte-1-aplicação-dos-conceitos-fundamentais">Parte 1 —
+Aplicação dos conceitos fundamentais</h1>
+<h2 id="modelagem-de-dados">1.1 Modelagem de dados</h2>
+<p><strong>Entidades principais</strong></p>
+<ol type="1">
+<li><strong>Competição / temporada</strong> — metadados em
+<code>competitions.json</code> e pasta
+<code>matches/&lt;competition_id&gt;/&lt;season_id&gt;.json</code>.<br />
+</li>
+<li><strong>Partida</strong> — identificador <code>match_id</code>,
+mandante, visitante, placar (arquivo de partidas).<br />
+</li>
+<li><strong>Time</strong> — <code>team</code> (nome) e identificador
+implícito nos eventos.<br />
+</li>
+<li><strong>Jogador</strong> — <code>player</code> e
+<code>position</code> quando o evento é associado a um jogador.<br />
+</li>
+<li><strong>Evento</strong> — unidade atômica da análise:
+<code>id</code>, <code>index</code>, <code>period</code>,
+<code>minute</code>/<code>second</code>, <code>type</code> (Pass, Shot,
+Pressure, …), localização <code>(x, y)</code>, subestruturas
+<code>pass</code>, <code>shot</code>, etc.</li>
+</ol>
+<p><strong>Estrutura de armazenamento</strong></p>
+<ul>
+<li><strong>Fonte:</strong> JSON linha a linha conforme exportação
+StatsBomb (<code>events/&lt;match_id&gt;.json</code>).<br />
+</li>
+<li><strong>Transformação aplicada:</strong> projeção para
+<strong>DataFrame</strong> tabular (uma linha por evento), implementada
+em <code>analise/lib_analise.py</code> (<code>load_events</code>,
+<code>load_all</code>). Colunas planas facilitam agregação em SQL-like
+(<code>groupby</code>) e visualização.</li>
+</ul>
+<p><strong>Atributos relevantes no DataFrame</strong></p>
+<table>
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 55%" />
+<col style="width: 17%" />
+</colgroup>
+<thead>
+<tr>
+<th>Coluna</th>
+<th>Tipo (lógico)</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>match_id</code></td>
+<td>inteiro</td>
+<td>Junção com metadados de partida</td>
+</tr>
+<tr>
+<td><code>minute</code>, <code>second</code></td>
+<td>inteiro</td>
+<td>Tempo de jogo</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>texto</td>
+<td>Filtrar passes, chutes, pressões</td>
+</tr>
+<tr>
+<td><code>team</code></td>
+<td>texto</td>
+<td>Agregar por Barcelona / Real Madrid</td>
+</tr>
+<tr>
+<td><code>x</code>, <code>y</code></td>
+<td>float</td>
+<td>Mapas e heatmaps (campo 120×80)</td>
+</tr>
+<tr>
+<td><code>possession</code>, <code>possession_team</code></td>
+<td>int / texto</td>
+<td>Sequências de posse (M1)</td>
+</tr>
+<tr>
+<td><code>pass_end_x</code>, <code>pass_end_y</code>,
+<code>pass_cross</code>, <code>pass_outcome</code></td>
+<td>float / bool / texto</td>
+<td>Progressão e cruzamentos (M2, M4)</td>
+</tr>
+<tr>
+<td><code>shot_xg</code>, <code>shot_outcome</code></td>
+<td>float / texto</td>
+<td>Ameaça (M6)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="métricas-de-desempenho-dna-tático">1.2 Métricas de desempenho
+(DNA tático)</h2>
+<p>Todas as métricas foram calculadas sobre a <strong>união dos dois
+jogos</strong>, agregadas por <code>team</code>, salvas em
+<code>figuras/tabela_dna.csv</code> e reproduzidas no notebook
+<code>analise/analise_dna_tatico.ipynb</code>.</p>
+<h3 id="m1-construção-de-jogo-posse">M1 — Construção de jogo
+(posse)</h3>
+<ul>
+<li><strong>Definição:</strong> agrupar eventos por
+<code>(match_id, possession, possession_team)</code>; contar passes na
+posse; duração aproximada = diferença entre <code>minute</code> máximo e
+mínimo na posse; média de passes por posse e fração de posses com ≥5
+passes.<br />
+</li>
+<li><strong>Interpretação:</strong> mais passes por posse e posses
+longas frequentes indicam <strong>construção elaborada</strong>; valores
+menores sugerem <strong>transição / jogo mais direto</strong>.</li>
+</ul>
+<p><strong>Resultado (resumo):</strong> Barcelona apresenta
+<strong>média de passes por posse maior</strong> (~7,45 vs ~4,37) e
+<strong>duração média da posse</strong> maior (~0,40 vs ~0,25 min
+aproximados), alinhado a um perfil de circulação e retenção. O Real
+Madrid troca de posse com menos passes por sequência.</p>
+<h3 id="m2-progressão-no-campo">M2 — Progressão no campo</h3>
+<ul>
+<li><strong>Definição:</strong> passes completos
+(<code>pass_outcome</code> nulo); <span
+class="math inline"><em>Δ</em><em>x</em> = <code>pass_end_x</code> − <code>x</code></span>;
+avanço médio; <strong>passes progressivos</strong> = <span
+class="math inline"><em>Δ</em><em>x</em> ≥ 10</span> m.<br />
+</li>
+<li><strong>Interpretação:</strong> maior avanço médio e maior % de
+progressivos indicam <strong>verticalização</strong>; avanço médio menor
+com muitos passes pode indicar <strong>circulação</strong> para
+desestabilizar bloco.</li>
+</ul>
+<p><strong>Resultado:</strong> o Real Madrid apresenta <strong>avanço
+médio maior</strong> (~4,35 m vs ~1,83 m) e <strong>% maior de passes
+progressivos</strong> (~29,8% vs ~19,8%), sugerindo jogo mais direto na
+amostra; o Barcelona completa mais passes totais com avanço médio menor
+(circulação + construção).</p>
+<h3 id="m3-lateralização-terço-de-ataque">M3 — Lateralização (terço de
+ataque)</h3>
+<ul>
+<li><strong>Definição:</strong> eventos com <span
+class="math inline"><em>x</em> ∈ [80, 120]</span>; lado
+<strong>esquerdo</strong> do ataque se <span
+class="math inline"><em>y</em> ≥ 40</span>, senão
+<strong>direito</strong> (convenção StatsBomb).<br />
+</li>
+<li><strong>Interpretação:</strong> desequilíbrio entre
+<code>pct_esq</code> e <code>pct_dir</code> indica <strong>viés de
+corredor</strong> no terço final.</li>
+</ul>
+<p><strong>Resultado:</strong> Barcelona concentra ~60% dos eventos
+ofensivos no <strong>lado direito</strong> do ataque (<span
+class="math inline"><em>y</em> &lt; 40</span>); o Real Madrid está mais
+<strong>pela esquerda</strong> (~55%). Útil para scouting de sobrecarga
+e combinações.</p>
+<h3 id="m4-infiltração-vs-cruzamento-entrada-na-área">M4 — Infiltração
+vs cruzamento (entrada na área)</h3>
+<ul>
+<li><strong>Definição:</strong> passes completos com
+<code>pass_end_x ≥ 102</code> (aproximação da grande área);
+<code>cruzamentos</code> = flag <code>pass_cross</code>;
+<code>pct_cruzamentos</code> = cruzamentos / total de passes para a
+área.<br />
+</li>
+<li><strong>Interpretação:</strong> maior % de cruzamentos indica
+finalização <strong>pelas linhas de fundo</strong>; menor % sugere mais
+<strong>jogo pelo meio / infiltração</strong>.</li>
+</ul>
+<p><strong>Resultado:</strong> ambos com <strong>% de cruzamentos
+similar</strong> (~15,6–15,9%) sobre o total de passes que entram na
+área — diferença tática maior aparece em M2/M3/M5.</p>
+<h3 id="m5-altura-de-recuperação-pressão-proxy-de-bloco">M5 — Altura de
+recuperação / pressão (proxy de bloco)</h3>
+<ul>
+<li><strong>Definição:</strong> média de <code>x</code> em eventos
+<code>Ball Recovery</code>, <code>Pressure</code>,
+<code>Interception</code>, <code>Duel</code>; contagem de
+<code>Pressure</code>.<br />
+</li>
+<li><strong>Interpretação:</strong> <strong>x médio mais alto</strong> →
+recuperações/pressões mais adiantadas (<strong>linha mais
+alta</strong>), proxy de pressão ou bloco adiantado.</li>
+</ul>
+<p><strong>Resultado:</strong> Barcelona com <strong>x médio
+maior</strong> (~54,6 vs ~51,6) e <strong>menos</strong> eventos de
+pressão que o Real na amostra (194 vs 315) — leitura conjunta: quando
+pressiona/recupera, tende a fazê-lo um pouco mais alto; o Real gera mais
+volume de pressão registrada.</p>
+<h3 id="m6-ameaça-finalização">M6 — Ameaça (finalização)</h3>
+<ul>
+<li><strong>Definição:</strong> por jogo e por time: contagem de chutes;
+soma de <code>statsbomb_xg</code>; gols totais nos dois jogos.<br />
+</li>
+<li><strong>Interpretação:</strong> xG e chutes por jogo medem
+<strong>volume e qualidade</strong> da finalização.</li>
+</ul>
+<p><strong>Resultado:</strong> Barcelona ~<strong>16
+chutes/jogo</strong> e ~<strong>1,60 xG/jogo</strong> com <strong>5
+gols</strong> nos dois jogos; Real Madrid ~<strong>14
+chutes/jogo</strong> e ~<strong>1,33 xG/jogo</strong> com <strong>2
+gols</strong>. Coerente com o placar agregado da amostra (5–2 em
+gols).</p>
+<hr />
+<h2 id="qualidade-dos-dados-e-limitações">1.3 Qualidade dos dados e
+limitações</h2>
+<ol type="1">
+<li><strong>Codificação humana:</strong> eventos são anotados por
+analistas; há subjetividade (ex.: fronteira entre <code>Pressure</code>
+e duelo).<br />
+</li>
+<li><strong>Completude:</strong> nem todo micro-movimento vira evento;
+sequências rápidas podem ser simplificadas.<br />
+</li>
+<li><strong>Posse:</strong> usamos o identificador
+<code>possession</code> da StatsBomb como <strong>proxy</strong>
+operacional; não substitui tracking óptico.<br />
+</li>
+<li><strong>Sem tracking contínuo:</strong> não há posição de todos os
+jogadores a cada instante — só eventos discretos (e 360 só em subset de
+jogos, não usado aqui).<br />
+</li>
+<li><strong>Contexto ausente:</strong> clima, ordens táticas no
+intervalo, estado físico, cartões acumulados, importância da tabela —
+não estão no JSON.<br />
+</li>
+<li><strong>Amostra pequena:</strong> <strong>dois jogos</strong> entre
+os mesmos times; o DNA é <strong>indicativo daquele
+confronto/temporada</strong>, não uma verdade eterna sobre os
+clubes.</li>
+</ol>
+<p><strong>Impacto na análise:</strong> as métricas descrevem
+<strong>padrões registrados</strong> na amostra; generalizações para
+outras competições ou anos exigem mais dados e validação externa (vídeo,
+tracking).</p>
+<hr />
+<h2 id="visualização-de-dados">1.4 Visualização de dados</h2>
+<p>As figuras foram geradas com <code>mplsoccer</code> (campo tipo
+StatsBomb) e <code>matplotlib</code>, salvas em <code>figuras/</code>
+(script <code>analise/run_gerar_figuras.py</code>).</p>
+<figure>
+<img src="../figuras/v1_heatmap_toques.png"
+alt="Heatmap de toques por time" />
+<figcaption aria-hidden="true">Heatmap de toques por time</figcaption>
+</figure>
+<p><em>Figura 1 — Densidade de eventos com coordenadas
+(<code>x</code>,<code>y</code>) por time: onde cada equipe “vive” no
+campo.</em></p>
+<figure>
+<img src="../figuras/v2_recuperacoes.png"
+alt="Recuperações e pressões" />
+<figcaption aria-hidden="true">Recuperações e pressões</figcaption>
+</figure>
+<p><em>Figura 2 — Dispersão de recuperação / interceptação / pressão;
+linha tracejada no x médio (proxy de altura média).</em></p>
+<figure>
+<img src="../figuras/v3_passes_progressivos.png"
+alt="Passes progressivos" />
+<figcaption aria-hidden="true">Passes progressivos</figcaption>
+</figure>
+<p><em>Figura 3 — Setas de passes com Δx ≥ 10 m (progressivos).</em></p>
+<figure>
+<img src="../figuras/v4_rede_266424.png"
+alt="Rede de passes — Bernabéu" />
+<figcaption aria-hidden="true">Rede de passes — Bernabéu</figcaption>
+</figure>
+<p><em>Figura 4a — Rede de passes (≥3 ligações entre o mesmo par); jogo
+266424.</em></p>
+<figure>
+<img src="../figuras/v4_rede_267533.png"
+alt="Rede de passes — Camp Nou" />
+<figcaption aria-hidden="true">Rede de passes — Camp Nou</figcaption>
+</figure>
+<p><em>Figura 4b — Mesmo modelo para o jogo 267533.</em></p>
+<figure>
+<img src="../figuras/v5_barras_dna.png"
+alt="Comparativo de métricas DNA" />
+<figcaption aria-hidden="true">Comparativo de métricas DNA</figcaption>
+</figure>
+<p><em>Figura 5 — Barras comparativas: passes/posse, % passes
+progressivos, x médio de recuperação, % cruzamentos na área,
+xG/jogo.</em></p>
+<p><strong>Padrões visíveis:</strong> mapas evidenciam <strong>ocupação
+de espaço</strong>; redes mostram <strong>eixos de circulação</strong>
+(hubs); barras sintetizam o <strong>DNA numérico</strong> para o
+relatório e para o <em>dashboard</em> proposto na Parte 2.</p>
+<hr />
+<h1 id="parte-2-proposta-de-sistema-no-futebol">Parte 2 — Proposta de
+sistema no futebol</h1>
+<h2 id="definição-do-problema-e-relevância">2.1 Definição do problema e
+relevância</h2>
+<p><strong>Problema:</strong> comissões técnicas e analistas precisam
+<strong>resumir o estilo do adversário</strong> (construção vs
+transição, corredores preferidos, altura de pressão, finalização) com
+base em dados objetivos, em tempo hábil para a semana de jogo.</p>
+<p><strong>Relevância:</strong> reduz dependência só de impressão
+subjetiva; apoia <strong>decisão</strong> sobre pressing, compactação, e
+marcação de corredores; comunica padrões a jogadores via visualizações
+simples.</p>
+<h2 id="dados-e-modelagem-no-sistema">2.2 Dados e modelagem no
+sistema</h2>
+<ul>
+<li><strong>Entrada:</strong> arquivos <code>events/*.json</code> +
+<code>matches/*.json</code> (metadados) da pasta local ou API
+futura.<br />
+</li>
+<li><strong>Pipeline:</strong> ingestão JSON → DataFrame de eventos
+(<code>lib_analise</code>) → agregações M1–M6 → tabela <code>dna</code>
+→ exportação de PNG/PDF.<br />
+</li>
+<li><strong>Persistência (evolução):</strong> opcional SQLite/Parquet
+para histórico multi-partida.</li>
+</ul>
+<h2 id="métricas-e-análises-automatizadas">2.3 Métricas e análises
+automatizadas</h2>
+<p>O sistema rotula automaticamente, por time e janela de jogos:</p>
+<ol type="1">
+<li>Construção (M1)<br />
+</li>
+<li>Verticalidade (M2)<br />
+</li>
+<li>Lateralização ofensiva (M3)<br />
+</li>
+<li>Entrada na área por cruzamento (M4)<br />
+</li>
+<li>Altura de recuperação / intensidade de pressão (M5)<br />
+</li>
+<li>Ameaça de finalização (M6)</li>
+</ol>
+<p>Saída: <strong>perfil comparativo</strong> (Barcelona vs Real Madrid
+na demo) + alertas textuais gerados por regras (ex.: se
+<code>pct_progressivos</code> &gt; 25% e
+<code>media_passes_por_posse</code> &lt; 5 → tag sugerida “Transição
+vertical”).</p>
+<h2 id="coleta-e-qualidade-dos-dados">2.4 Coleta e qualidade dos
+dados</h2>
+<ul>
+<li><strong>Coleta:</strong> download do repositório público StatsBomb;
+atualização manual ao puxar novas versões do GitHub.<br />
+</li>
+<li><strong>Qualidade:</strong> conforme seção 1.3; o sistema deve
+exibir <strong>disclaimer</strong> e tamanho da amostra (N jogos).</li>
+</ul>
+<h2 id="limitações-e-desafios-do-sistema">2.5 Limitações e desafios do
+sistema</h2>
+<ul>
+<li>Não infere <strong>intenção</strong> do treinador nem lê
+<strong>princípios</strong> táticos não observáveis nos eventos.<br />
+</li>
+<li><strong>Viés de resultado:</strong> um clássico 0–4 pode alterar
+ritmo e risco; ideal agregar mais jogos.<br />
+</li>
+<li><strong>Manutenção:</strong> versões do schema de eventos (PDF
+<em>Open Data Events</em>) podem mudar nomes/campos.</li>
+</ul>
+<h2 id="visualização-e-apresentação-dashboard">2.6 Visualização e
+apresentação (dashboard)</h2>
+<p><strong>Wireframe textual (tela única “Adversário”):</strong></p>
+<ol type="1">
+<li>Cabeçalho: adversário, últimos N jogos, competição.<br />
+</li>
+<li>Painel esquerdo: <strong>Figura 5</strong> (barras DNA) + tabela
+numérica.<br />
+</li>
+<li>Painel central: <strong>Figura 1</strong> + <strong>Figura
+3</strong> (mapa + progressivos).<br />
+</li>
+<li>Painel direito: <strong>Figura 2</strong> + <strong>Figura
+4</strong> (rede + recuperação).<br />
+</li>
+<li>Rodapé: texto gerado (“alto volume de passes por posse”, “favorece
+corredor X”, etc.).</li>
+</ol>
+<p><strong>Usuário final:</strong> analista de performance ou auxiliar
+técnico — prioriza <strong>comparabilidade</strong> e <strong>leitura
+rápida</strong> antes do vídeo tático.</p>
+<hr />
+<h1 id="parte-3-integração-e-evolução">Parte 3 — Integração e
+evolução</h1>
+<h2 id="integração-dos-conceitos-da-disciplina">3.1 Integração dos
+conceitos da disciplina</h2>
+<pre class="text"><code>Modelagem (entidade Evento + DataFrame)
+        ↓
+Métricas (M1–M6 — proxies de estilo)
+        ↓
+Visualização (mapas, redes, barras)
+        ↓
+Interpretação / decisão (preparação de jogo)</code></pre>
+<p>A <strong>modelagem</strong> garante que cada métrica tenha
+<strong>rastreabilidade</strong> até o evento bruto; as
+<strong>métricas</strong> comprimem milhares de linhas em poucos números
+interpretáveis; as <strong>visualizações</strong> devolvem
+<strong>contexto espacial</strong> que números sozinhos escondem.</p>
+<h2 id="evolução-ao-longo-da-disciplina">3.2 Evolução ao longo da
+disciplina</h2>
+<p>Exemplos do que pode ser narrado (ajuste às aulas reais):</p>
+<ul>
+<li>Início: leitura manual de JSON e contagens simples de passes.<br />
+</li>
+<li>Evolução: definição formal de <strong>posse</strong> via
+<code>possession</code>, <strong>passes progressivos</strong> com limiar
+em metros, e <strong>normalização</strong> por jogo.<br />
+</li>
+<li>Próximos passos: incluir <strong>xThreat</strong> ou redes de posse,
+agregar <strong>10+ jogos</strong>, exportar <strong>API</strong>
+interna, ou integrar <strong>lineups</strong> para contexto de
+formação.</li>
+</ul>
+<h2 id="reflexão-final">3.3 Reflexão final</h2>
+<table>
+<colgroup>
+<col style="width: 5%" />
+<col style="width: 58%" />
+<col style="width: 35%" />
+</colgroup>
+<thead>
+<tr>
+<th></th>
+<th>Análise inicial (conceitual)</th>
+<th>Sistema proposto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dados</td>
+<td>Eventos soltos</td>
+<td>Pipeline + DataFrame versionado</td>
+</tr>
+<tr>
+<td>Métricas</td>
+<td>Contagem genérica</td>
+<td>6 proxies alinhados a leitura tática</td>
+</tr>
+<tr>
+<td>Visual</td>
+<td>Ideia genérica de “mapa”</td>
+<td>5 figuras padronizadas + dashboard</td>
+</tr>
+<tr>
+<td>Decisão</td>
+<td>Interpretação ad hoc</td>
+<td>Painel comparativo replicável</td>
+</tr>
+</tbody>
+</table>
+<p><strong>O que se manteve:</strong> foco em <strong>eventos com
+coordenadas</strong> e na pergunta sobre <strong>estilo</strong>.<br />
+<strong>O que evoluiu:</strong> formalização M1–M6, script reprodutível,
+e proposta de produto para <strong>análise de adversário</strong>.</p>
+<hr />
+<h2 id="conclusão">Conclusão</h2>
+<p>Na amostra (dois Clásicos 2015/16), o <strong>Barcelona</strong>
+apresenta DNA de <strong>maior passes por posse</strong>, <strong>maior
+duração de posse</strong>, <strong>maior concentração pelo corredor
+direito no terço de ataque</strong> e <strong>maior xG e gols</strong>;
+o <strong>Real Madrid</strong> aparece com <strong>jogo mais
+vertical</strong> (maior avanço médio e % de passes progressivos),
+<strong>mais ações de pressão registradas</strong> e <strong>recuperação
+média um pouco mais baixa</strong> no conjunto M5 — leitura sempre
+condicionada ao n=2 jogos e ao contexto histórico da temporada.</p>
+<hr />
+<h2 id="referências-e-atribuição">Referências e atribuição</h2>
+<ul>
+<li>StatsBomb Open Data: <a
+href="https://github.com/statsbomb/open-data">https://github.com/statsbomb/open-data</a><br />
+</li>
+<li>Documentação de eventos: PDF <em>Open Data Events</em> no
+repositório (<code>doc/</code>).<br />
+</li>
+<li><strong>Uso dos dados:</strong> citar <strong>StatsBomb</strong> e
+observar <strong>Media Pack</strong> / licença ao divulgar trabalhos
+públicos.</li>
+</ul>
+<p><strong>Repositório de código deste trabalho:</strong> pasta
+<code>analise/</code> (notebook + <code>lib_analise.py</code> +
+<code>run_gerar_figuras.py</code>), <code>figuras/</code> (saídas),
+<code>relatorio/</code> (este documento).</p>
+</body>
+</html>
