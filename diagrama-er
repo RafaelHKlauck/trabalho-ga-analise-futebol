@@ -1,0 +1,106 @@
+---
+config:
+  layout: elk
+---
+erDiagram
+	direction LR
+	COMPETICAO {
+		int id_competicao PK ""  
+		string nome_competicao  ""  
+		string pais  ""  
+		string genero  ""  
+	}
+
+	TEMPORADA {
+		int id_temporada PK ""  
+		string nome_temporada  ""  
+		int id_competicao FK ""  
+	}
+
+	TIME {
+		int id_time PK ""  
+		string nome_time  ""  
+	}
+
+	JOGADOR {
+		int id_jogador PK ""  
+		string nome_jogador  ""  
+		string posicao  ""  
+	}
+
+	PARTIDA {
+		int id_partida PK ""  
+		int id_temporada FK ""  
+		int id_time_mandante FK ""  
+		int id_time_visitante FK ""  
+		int gols_mandante  ""  
+		int gols_visitante  ""  
+		date data_partida  ""  
+		string estadio  ""  
+	}
+
+	EVENTO {
+		int id_evento PK ""  
+		int id_partida FK ""  
+		int id_time FK ""  
+		int id_jogador FK ""  
+		int id_posse  ""  
+		string time_posse  ""  
+		int periodo  ""  
+		int minuto  ""  
+		int segundo  ""  
+		string tipo_evento  ""  
+		float x  ""  
+		float y  ""  
+	}
+
+	PASSE {
+		int id_evento PK,FK ""  
+		float fim_x  ""  
+		float fim_y  ""  
+		boolean cruzamento  ""  
+		string resultado  ""  
+	}
+
+	CHUTE {
+		int id_evento PK,FK ""  
+		float xg  ""  
+		string resultado  ""  
+	}
+
+	DNA_TIME {
+		int id_time FK ""  
+		int id_temporada FK ""  
+		int posses_total  ""  
+		float media_passes_por_posse  ""  
+		float mediana_passes_por_posse  ""  
+		float posses_longas_5plus  ""  
+		float duracao_media_min_posse  ""  
+		float posses_por_jogo_media  ""  
+		float avanco_medio_m  ""  
+		float pct_progressivos  ""  
+		int passes_completos  ""  
+		float pct_esq  ""  
+		float pct_dir  ""  
+		float pct_cruzamentos  ""  
+		int cruzamentos  ""  
+		int total_passes_para_area  ""  
+		float x_medio_recuperacao  ""  
+		int pressure_count  ""  
+		int n_eventos_defensivos  ""  
+		float chutes_por_jogo  ""  
+		float xg_por_jogo  ""  
+		int gols_total  ""  
+	}
+
+    COMPETICAO ||--o{ TEMPORADA : "1:N possui"
+    TEMPORADA  ||--o{ PARTIDA   : "1:N inclui"
+    TIME       ||--o{ PARTIDA   : "1:N é_mandante_em"
+    TIME       ||--o{ PARTIDA   : "1:N é_visitante_em"
+    PARTIDA    ||--o{ EVENTO    : "1:N registra"
+    TIME       ||--o{ EVENTO    : "1:N realiza"
+    JOGADOR    ||--o{ EVENTO    : "1:N participa"
+    EVENTO     ||--o| PASSE     : "1:1 é_um"
+    EVENTO     ||--o| CHUTE     : "1:1 é_um"
+    TIME       ||--o{ DNA_TIME  : "1:N possui"
+    TEMPORADA  ||--o{ DNA_TIME  : "1:N analisa"
