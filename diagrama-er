@@ -68,6 +68,13 @@ erDiagram
 		string resultado  ""  
 	}
 
+	PRESSAO {
+		int id_evento PK,FK ""  
+		string tipo ""
+        float nivel  ""  
+		string resultado  ""  
+	}
+
 	DNA_TIME {
 		int id_time FK ""  
 		int id_temporada FK ""  
@@ -102,5 +109,6 @@ erDiagram
     JOGADOR    ||--o{ EVENTO    : "1:N participa"
     EVENTO     ||--o| PASSE     : "1:1 é_um"
     EVENTO     ||--o| CHUTE     : "1:1 é_um"
+    EVENTO     ||--o| PRESSAO     : "1:1 é_um"
     TIME       ||--o{ DNA_TIME  : "1:N possui"
     TEMPORADA  ||--o{ DNA_TIME  : "1:N analisa"
