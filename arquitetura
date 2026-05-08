@@ -1,0 +1,34 @@
+flowchart LR
+
+    subgraph Fonte de Dados
+        A[GitHub StatsBomb Open Data<br>Arquivos JSON]
+    end
+
+    subgraph Ingestao
+        B[Job em Python<br>Downloader Automatico]
+        C[Validador de Schema<br>Padronizacao]
+    end
+
+    subgraph Armazenamento
+        D[(PostgreSQL<br>Banco Relacional)]
+    end
+
+    subgraph Processamento Analitico
+        E[Pipeline Pandas<br>Limpeza e Transformacao]
+        F[Calculo de Metricas<br>DNA dos Times]
+    end
+
+    subgraph REST API
+        H[API REST<br>FastAPI / Flask]
+    end
+
+    subgraph Visualizacao
+        I[Dashboard Web<br>Streamlit / React]
+        J[Graficos Matplotlib / Plotly]
+    end
+
+    A --> B --> C --> D
+    D --> E --> F --> H
+    H --> I
+    H --> J
+    F --> D
