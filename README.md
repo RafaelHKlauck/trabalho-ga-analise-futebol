@@ -18,6 +18,17 @@ python analise/run_gerar_figuras.py   # gera figuras/*.png e figuras/tabela_dna.
 jupyter notebook analise/analise_dna_tatico.ipynb
 ```
 
+## Grau B — MVP Streamlit
+
+App de análise de adversário com diagnóstico tático automático:
+
+```bash
+source .venv/bin/activate
+streamlit run app/app.py
+```
+
+Selecione competição/temporada → time-alvo (opcional time de referência) → o sistema gera frases tipo _"Joga mais pela direita"_, _"Constrói pela posse"_, _"Bloco alto"_ a partir das regras em `app/regras.py`. Para rodar só o diagnóstico no terminal (sem UI): `python -m app.scout`. Veja `PLANO_GRAU_B.md` para o pitch completo.
+
 ## Atribuição
 
 Dados: **StatsBomb** — ver licença e _Media Pack_ no repositório oficial.
